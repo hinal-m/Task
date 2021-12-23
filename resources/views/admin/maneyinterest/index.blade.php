@@ -63,7 +63,7 @@
                     dataType: "json",
                     success: function(data) {
                         if (data) {
-                            swal("Updated!",
+                            swal("Paid",
                                 "Amount Deposite Succesfuly",
                                 "success");
                             window.location.href =
