@@ -17,8 +17,8 @@ class ManyatinterestDataTable extends DataTable
     {
         return datatables()
         ->eloquent($query)
-        ->editColumn('deposite',function($data){
-            return  '<a data-id="'.$data->id.'" id="deposite" style="color:white" class="btn-sm btn-success">Deposite</a>';
+        ->addColumn('deposite',function($data){
+            return  '<a data-id="'.$data->id.'" id="deposite" style="color:white" class="btn-sm btn-warning">Deposite</a>';
         })
         ->editColumn('status', function($data){
             if($data->status == '1'){

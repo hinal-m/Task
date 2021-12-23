@@ -24,7 +24,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::middleware(['guest:admin'])->group(function () {
         Route::get('/login',[LoginController::class,'loginFormShow'])->name('login');
-        // Route::view('/login-css', 'dashboard.admin.layouts.login')->name('login_css');
         Route::post('/check', [LoginController::class, 'loginCheck'])->name('check');
 
 
@@ -51,13 +50,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/deposite', [ManyatinterestController::class,'deposite'])->name('deposite');
 
         //Change Password
-    Route::get('/changePassword',      [LoginController::class,'showChangePasswordGet'])->name('changePasswordGet');
-    Route::post('/changePassword',     [LoginController::class, 'changePasswordPost'])->name('changePasswordPost');
-
-
-
-
-
+        Route::get('/changePassword',      [LoginController::class,'showChangePasswordGet'])->name('changePasswordGet');
+        Route::post('/changePassword',     [LoginController::class, 'changePasswordPost'])->name('changePasswordPost');
 
     });
 });
