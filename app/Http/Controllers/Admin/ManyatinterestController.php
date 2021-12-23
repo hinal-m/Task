@@ -26,6 +26,7 @@ class ManyatinterestController extends Controller
         $request->validate(
             [
                 'name' => 'required|exists:users,name',
+                'amount' => 'required',
             ],
             [
                 'name.exists' => 'This name is not exists on users table',
@@ -48,8 +49,19 @@ class ManyatinterestController extends Controller
         $user->amount = $request['amount'];
         $user->interest_rate = $amount;
         $user->	payment_pariod_start = $request->start_date;
+        $user->	payment_pariod_end = $request->end_date;
         $user->save();
         return response()->json(['data' => $user]);
 
+    }
+
+    public function deposite(Request $request)
+    {
+        $money = Manyatinterest::find($request['id']);
+        $total = $money->amount + $money->interest_rate;
+        $money->status = '1';
+        $money->total_amount = $total;
+        $money->save();
+        return response()->json(['data' => $money]);
     }
 }

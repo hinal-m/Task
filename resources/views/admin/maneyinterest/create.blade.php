@@ -44,20 +44,14 @@
                                         <input type='tax' class="form-control datepicker" name="start_date" id="start_date"
                                             placeholder='Select Date' style='width: 180px;' autocomplete="off">
                                     </div>
-                                    {{-- <div class="form-group col-md-6">
+                                    <div class="form-group col-md-6">
                                         <label>
                                             <h5 class="mt-2">Payment End Date</h5>
                                         </label>
                                         <input type='tax' name="end_date" class="form-control datepicker" id='end_date'
                                             placeholder='Select Date' style='width: 180px;' autocomplete="off">
-                                    </div> --}}
+                                    </div>
                                 </div>
-                                {{-- <div class="form-group">
-                                    <label class="form-control-label" style="font-size:13px">For how many days</label>
-                                    <input type="text" class="form-control" name="day" value="{{ old('day') }}"
-                                        placeholder="Enter amount">
-                                </div> --}}
-
                                 <button type="submit" id="submit" class="btn btn-primary btn-icon-text">
                                     <i class="mdi mdi-file-check btn-icon-prepend" id="submit"></i> Submit </button>
                                 <a href="{{ route('admin.m_index') }}" class="btn btn-dark">Cancel</a>
@@ -85,27 +79,35 @@
                     }
                 });
 
-                // $("#end_date").datepicker({
-                //     dateFormat: "yy-mm-dd",
-                //     onSelect: function(selected) {
-                //         $("#start_date").datepicker("option", "maxDate", selected)
-                //         maxDate + 1;
-                //     }
-                // });
+                $("#end_date").datepicker({
+                    dateFormat: "yy-mm-dd",
+                    onSelect: function(selected) {
+                        $("#start_date").datepicker("option", "maxDate", selected)
+                        maxDate + 1;
+                    }
+                });
             });
         </script>
         <script>
             $(document).ready(function() {
-                alert(1);
+                $.validator.addMethod("lettersonly", function(value, element) {
+                    return this.optional(element) || /^[a-z]+$/i.test(value);
+                }, "Letters only please");
+
                 $('#submit_form').validate({
                         rules: {
                             name: {
                                 required: true,
+                                lettersonly: true
                             },
                             amount: {
                                 required: true,
+                                digits:true
                             },
                             start_date: {
+                                required: true,
+                            },
+                            end_date: {
                                 required: true,
                             },
                         },
@@ -117,6 +119,9 @@
                             'required': 'Please Enter Your amount'
                         },
                         'start_date': {
+                            'required': 'Please Select Start Date'
+                        },
+                        'end_date': {
                             'required': 'Please Select Start Date'
                         },
                     },
@@ -135,7 +140,6 @@
 
 
             function register(form) {
-                alert(form);
                 $('.text-strong').html('');
                 var form = $('#submit_form');
                 var formData = new FormData(form[0]);
@@ -163,7 +167,6 @@
                             processData: false,
                             cache: false,
                             success: function(query) {
-                                alert(query);
                                 if (query) {
                                     swal("Inserted!",
                                         "Category Updated Successfully.",

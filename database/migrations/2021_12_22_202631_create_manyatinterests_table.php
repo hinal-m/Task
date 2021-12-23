@@ -20,6 +20,7 @@ class CreateManyatinterestsTable extends Migration
             $table->string('interest_rate');
             $table->string('total_amount')->nullable();
             $table->string('payment_pariod_start');
+            $table->string('payment_pariod_end');
             $table->timestamps();
         });
     }

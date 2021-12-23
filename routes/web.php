@@ -48,6 +48,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/index-maney', [ManyatinterestController::class,'index'])->name('m_index');
         Route::get('/create_many', [ManyatinterestController::class,'create'])->name('m_create');
         Route::post('/store_many', [ManyatinterestController::class,'store'])->name('m_store');
+        Route::get('/deposite', [ManyatinterestController::class,'deposite'])->name('deposite');
+
+        //Change Password
+    Route::get('/changePassword',      [LoginController::class,'showChangePasswordGet'])->name('changePasswordGet');
+    Route::post('/changePassword',     [LoginController::class, 'changePasswordPost'])->name('changePasswordPost');
 
 
 

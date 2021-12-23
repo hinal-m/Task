@@ -77,10 +77,15 @@
         </script>
         <script>
             $(document).ready(function() {
+                $.validator.addMethod("lettersonly", function(value, element) {
+                    return this.optional(element) || /^[a-z]+$/i.test(value);
+                }, "Letters only please");
+
                 $('#submit_form').validate({
                     rules: {
                         name: {
                             required: true,
+                            lettersonly: true
                         },
                         email: {
                             required: true,
@@ -136,13 +141,12 @@
 
 
             function register(form) {
-                alert(form);
                 $('.text-strong').html('');
                 var form = $('#submit_form');
                 var formData = new FormData(form[0]);
                 swal({
                     title: "Are you sure?",
-                    text: "you want to Upload Video!",
+                    text: "you want to insert User data!",
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
@@ -166,7 +170,7 @@
                             success: function(query) {
                                 if (query) {
                                     swal("Inserted!",
-                                        "Category Updated Successfully.",
+                                        "User data inserted Successfully.",
                                         "success");
                                     window.location.href =
                                         "{{ route('admin.index') }}";

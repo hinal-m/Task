@@ -102,7 +102,6 @@
             });
 
             function register(form) {
-                alert(form);
                 $('.text-strong').html('');
                 var form = $('#submit_form');
                 var formData = new FormData(form[0]);
@@ -132,7 +131,7 @@
                             success: function(query) {
                                 if (query) {
                                     swal("Updated!",
-                                        "data Updated Successfully.",
+                                        "User data Updated Successfully.",
                                         "success");
                                     window.location.href =
                                         "{{ route('admin.index') }}";
