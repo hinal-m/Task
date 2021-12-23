@@ -20,8 +20,19 @@ class ManyatinterestDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables()
-            ->eloquent($query)
-            ->addColumn('action', 'moneyinterest.action');
+        ->eloquent($query)
+        ->editColumn('deposite',function($data){
+            return  '<a data-id="'.$data->id.'" id="status" style="color:white" class="btn-sm btn-success">Deposite</a>';
+        })
+        ->editColumn('status', function($data){
+            if($data->status == '1'){
+               return  '<a data-id="'.$data->id.'" id="status" style="color:white" class="btn-sm btn-success">Active</a>';
+            }else{
+               return '<a data-id="'.$data->id.'" id="status" style="color:white" class="btn-sm btn-danger">Unpaid</a>';
+            }
+        })
+        ->rawColumns(['status'])
+        ->addIndexColumn();
     }
 
     /**
@@ -65,15 +76,14 @@ class ManyatinterestDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
             Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            Column::make('name'),
+            Column::make('amount'),
+            Column::make('interest_rate'),
+            Column::make('payment_pariod_start'),
+            Column::make('total_amount'),
+            Column::make('status'),
+            Column::make('action'),
         ];
     }
 

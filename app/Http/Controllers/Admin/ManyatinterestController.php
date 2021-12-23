@@ -23,26 +23,33 @@ class ManyatinterestController extends Controller
 
     public function store(Request $request)
     {
-        $interest = Interest::get();
-        foreach ($interest as $interest) {
+        $request->validate(
+            [
+                'name' => 'required|exists:users,name',
+            ],
+            [
+                'name.exists' => 'This name is not exists on users table',
+            ]
+        );
 
-            if ($request['amount'] <= 500) {
+        if ($request['amount'] <= 500) {
 
-                $amount = $request['amount'] * $interest['interest_rate'] / 100;
+            $amount = $request['amount'] * 5 / 100;
+        } elseif ($request['amount'] > 500 && $request['amount'] <= 1000) {
 
-            } elseif ($request['amount'] > 500 && $request['amount'] <= 1000) {
-                dd($interest['interest_rate']);
-                $amount = $request['amount'] * 10 / 100;
-                dd($amount);
-            } elseif ($request['amount'] > 1001) {
-                $amount = $request['amount'] * 15 / 100;
-                dd($amount);
-            }
+
+            $amount = $request['amount'] * 10 / 100;
+        } elseif ($request['amount'] > 1001) {
+
+            $amount = $request['amount'] * 15 / 100;
         }
         $user = new Manyatinterest();
         $user->name = $request->name;
-        $user->amount = $request->$amount;
+        $user->amount = $request['amount'];
+        $user->interest_rate = $amount;
+        $user->	payment_pariod_start = $request->start_date;
         $user->save();
-        dd($user);
+        return response()->json(['data' => $user]);
+
     }
 }

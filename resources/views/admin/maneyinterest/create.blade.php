@@ -7,7 +7,8 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">User Form</h4>
-                            <form class="forms-sample" id="submit_form" action="" method="post">
+                            <form class="forms-sample" id="submit_form" action="{{ route('admin.m_store') }}"
+                                method="post">
                                 @csrf
                                 @if (Session::get('success'))
                                     <div class="alert alert-success">
@@ -24,13 +25,18 @@
                                     <label class="form-control-label" style="font-size:13px">NAME</label>
                                     <input type="text" class="form-control" name="name" value="{{ old('name') }}"
                                         placeholder="Enter Name">
+                                    @error('name')
+                                        <span class="text-danger" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label" style="font-size:13px">AMOUNT</label>
                                     <input type="text" class="form-control" name="amount" value="{{ old('amount') }}"
                                         placeholder="Enter amount">
                                 </div>
-                                {{-- <div class="row">
+                                <div class="row">
                                     <div class="form-group col-md-6">
                                         <label>
                                             <h5 class="mt-2">Payment Start Date</h5>
@@ -38,19 +44,19 @@
                                         <input type='tax' class="form-control datepicker" name="start_date" id="start_date"
                                             placeholder='Select Date' style='width: 180px;' autocomplete="off">
                                     </div>
-                                    <div class="form-group col-md-6">
+                                    {{-- <div class="form-group col-md-6">
                                         <label>
                                             <h5 class="mt-2">Payment End Date</h5>
                                         </label>
                                         <input type='tax' name="end_date" class="form-control datepicker" id='end_date'
                                             placeholder='Select Date' style='width: 180px;' autocomplete="off">
-                                    </div>
-                                </div> --}}
-                                <div class="form-group">
+                                    </div> --}}
+                                </div>
+                                {{-- <div class="form-group">
                                     <label class="form-control-label" style="font-size:13px">For how many days</label>
                                     <input type="text" class="form-control" name="day" value="{{ old('day') }}"
                                         placeholder="Enter amount">
-                                </div>
+                                </div> --}}
 
                                 <button type="submit" id="submit" class="btn btn-primary btn-icon-text">
                                     <i class="mdi mdi-file-check btn-icon-prepend" id="submit"></i> Submit </button>
@@ -79,33 +85,30 @@
                     }
                 });
 
-                $("#end_date").datepicker({
-                    dateFormat: "yy-mm-dd",
-                    onSelect: function(selected) {
-                        $("#start_date").datepicker("option", "maxDate", selected)
-                        maxDate + 1;
-                    }
-                });
+                // $("#end_date").datepicker({
+                //     dateFormat: "yy-mm-dd",
+                //     onSelect: function(selected) {
+                //         $("#start_date").datepicker("option", "maxDate", selected)
+                //         maxDate + 1;
+                //     }
+                // });
             });
         </script>
         <script>
             $(document).ready(function() {
+                alert(1);
                 $('#submit_form').validate({
-                    rules: {
-                        name: {
-                            required: true,
+                        rules: {
+                            name: {
+                                required: true,
+                            },
+                            amount: {
+                                required: true,
+                            },
+                            start_date: {
+                                required: true,
+                            },
                         },
-                        amount: {
-                            required: true,
-                        },
-                        start_date: {
-                            required: true,
-                        },
-                        end_date: {
-                            required: true,
-                        },
-
-                    },
                     messages: {
                         'name': {
                             'required': 'Please Enter Your Name'
@@ -115,9 +118,6 @@
                         },
                         'start_date': {
                             'required': 'Please Select Start Date'
-                        },
-                        'end_date': {
-                            'required': 'Please Select end Date'
                         },
                     },
                     highlight: function(element, errorClass, validClass) {
@@ -163,6 +163,7 @@
                             processData: false,
                             cache: false,
                             success: function(query) {
+                                alert(query);
                                 if (query) {
                                     swal("Inserted!",
                                         "Category Updated Successfully.",
