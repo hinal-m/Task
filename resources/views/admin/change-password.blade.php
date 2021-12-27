@@ -19,6 +19,7 @@
                                         {{ Session::get('fail') }}
                                     </div>
                                 @endif
+                                <input type="hidden" name="id" value="id">
                                 <div class="form-group">
                                     <label class="form-control-label" style="font-size:15px">CORRENT PASSWORD</label>
                                     <input type="password" class="form-control" id="current-password" name="current-password"

@@ -82,7 +82,7 @@
     });
     $(document).on('change','.status',function(){
         window.LaravelDataTables['moneyinterest-table'].draw();
-        e.prevenDefault();
+        e.preventDefault();
     });
     </script>
 @endpush

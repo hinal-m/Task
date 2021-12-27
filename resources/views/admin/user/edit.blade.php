@@ -7,9 +7,9 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Admin Form</h4>
-                            <form class="forms-sample" id="submit_form" action="{{ route('admin.update', $user->id) }}" method="post">
+                            <form class="forms-sample" id="submit_form" action="{{ route('admin.update', $user->id) }}" enctype="multipart/form-data" method="post">
                                 @csrf
-                                <input type="hidden" name="id">
+                                <input type="hidden" name="id" value="{{$user->id}}">
                                 <div class="form-group">
                                     <label class="form-control-label" style="font-size:13px">NAME</label>
                                     <input type="text" class="form-control" name="name" value="{{ $user->name }}">
@@ -17,11 +17,6 @@
                                 <div class="form-group">
                                     <label class="form-control-label" style="font-size:15px">EMAIL</label>
                                     <input type="text" name="email" value="{{ $user->email }}" class="form-control">
-                                    @error('email')
-                                        <span class="text-danger" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label" style="font-size:13px">MOBILE NO</label>
@@ -121,7 +116,7 @@
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]')
                                     .attr('content')
                             },
-                            type: 'POST',
+                            type: 'post',
                             url: "{{ route('admin.update', $user->id) }}",
                             data: formData,
                             dataType: 'JSON',
@@ -140,6 +135,7 @@
                             error: function(data) {
                                 $.each(data.responseJSON.errors, function(
                                     key, value) {
+                                        console.log(data.responseJSON.errors);
                                     $('[name=' + key + ']').after(
                                         '<span class="text-strong" style="color:red">' +
                                         value + '</span>')

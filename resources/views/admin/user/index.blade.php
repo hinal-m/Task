@@ -65,7 +65,7 @@
                                 }
                             }
                         });
-                        swal("Poof! Your data has been deleted!", {
+                        swal("User data has been deleted!", {
                             icon: "success",
                         });
                     } else {
@@ -106,8 +106,6 @@
                                 $(".asd").html("Inactive");
                             }
                             $('#user-table').DataTable().ajax.reload();
-
-                            return false;
                             $(".asd").html(data.status);
                             if (data) {
                                 swal("Updated!",

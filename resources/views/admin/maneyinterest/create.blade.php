@@ -145,7 +145,7 @@
                 var formData = new FormData(form[0]);
                 swal({
                     title: "Are you sure?",
-                    text: "you want to Upload Video!",
+                    text: "you want to taking the money",
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
@@ -169,7 +169,7 @@
                             success: function(query) {
                                 if (query) {
                                     swal("Inserted!",
-                                        "Category Updated Successfully.",
+                                        "Money taking Successfully.",
                                         "success");
                                     window.location.href =
                                         "{{ route('admin.m_index') }}";

@@ -7,7 +7,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">User Form</h4>
-                            <form class="forms-sample" id="submit_form" action="" method="post">
+                            <form class="forms-sample" id="submit_form" action=""enctype="multipart/form-data"  method="post">
                                 @csrf
                                 @if (Session::get('success'))
                                     <div class="alert alert-success">

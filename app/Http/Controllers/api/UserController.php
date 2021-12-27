@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\api;
 
-use App\DataTables\UserDataTable;
 use App\Http\Controllers\Controller;
 use App\Repositories\UserRepository;
-use Illuminate\Foundation\Auth\User;
+use GuzzleHttp\Psr7\Request as Psr7Request;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -16,18 +14,13 @@ class UserController extends Controller
     {
         $this->user = $user;
     }
-    public function index(UserDataTable $dataTable)
+    public function list()
     {
         $user = $this->user->all();
-        return $dataTable->render('admin.user.index');
+        return response()->json([
+            'message' =>'User listed',
+            'data' => $user]);
     }
-
-    public function create()
-    {
-        $user = User::get();
-        return view('admin.user.create', compact('user'));
-    }
-
     public function store(Request $request)
     {
         $request->validate(
@@ -53,18 +46,12 @@ class UserController extends Controller
         return response()->json(['data' => $user]);
     }
 
-    public function edit($id)
-    {
-        $user = User::find($id);
-        return view('admin.user.edit', compact('user'));
-    }
-
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $request->validate(
             [
                 'name' => 'required',
-                'email' => 'required|email|unique:users,email,' . $id,
+                'email' => 'required|email|unique:users,email,' . $request['id'],
                 'mobile_no' => 'required|digits:10',
                 'profile' => 'mimes:jpg,bmp,png',
             ],
@@ -75,27 +62,17 @@ class UserController extends Controller
             ]
         );
         $user = $this->user->update($request->all());
-        return response()->json(['data' => $user]);
+        return response()->json([
+            'message' => 'User updated succesfully',
+            'data' => $user,
+        ]);
     }
-
-    public function destroy(Request $request)
+    public function delete(Request $request)
     {
         $user = $this->user->delete($request->all());
-        return response()->json(['data' => $user]);
-    }
-
-    //chnage status
-    public function statusChange(Request $request)
-    {
-        $id = $request['id'];
-        // dd($id);
-        $category = User::find($id);
-        if ($category->status == "1") {
-            $category->status = "0";
-        } else {
-            $category->status = "1";
-        }
-        $category->save();
-        return response()->json(['data' => $category]);
+        return response()->json([
+            'message' => 'User deleted succesfully',
+            'data' => $user,
+        ]);
     }
 }
