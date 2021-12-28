@@ -1,4 +1,5 @@
 @extends('admin.layouts.main')
+@section('title','User-edit')
 @section('main')
     <div class="main-panel">
         <div class="content-wrapper">

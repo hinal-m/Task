@@ -1,4 +1,5 @@
 @extends('admin.layouts.main')
+@section('title','User-change-password')
 @section('main')
     <div class="main-panel">
         <div class="content-wrapper">

@@ -1,4 +1,5 @@
 @extends('admin.layouts.main')
+@section('title','interest-create')
 @section('main')
     <div class="main-panel">
         <div class="content-wrapper">

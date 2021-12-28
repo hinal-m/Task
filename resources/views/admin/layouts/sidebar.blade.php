@@ -1,7 +1,6 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-        <a class="sidebar-brand brand-logo" href="{{ route('admin.dashboard') }}"><img
-                src="{{ asset('assets/images/logo.svg') }}" alt="logo" /></a>
+        <a class="sidebar-brand brand-logo" href="{{ route('admin.dashboard') }}" style="color:white">Interest Rate</a>
         <a class="sidebar-brand brand-logo-mini" href="{{ route('admin.dashboard') }}"><img
                 src="{{ asset('assets/images/logo-mini.svg') }}" alt="logo" /></a>
     </div>
