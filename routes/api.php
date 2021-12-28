@@ -25,12 +25,14 @@ Route::post('login', [AdminController::class, 'login']);
 
 Route::group(['middleware' => 'auth:api'], function () {
 
+    Route::post('logout', [AdminController::class, 'logout']);
+
+    //user
     Route::get('list',[UserController::class,'list']);
     Route::post('store', [UserController::class,'store']);
     Route::put("update", [UserController::class, 'update']);
     Route::get("delete", [UserController::class, 'delete']);
 
-    Route::post('logout', [AdminController::class, 'logout']);
     //interest
     Route::post('store-interest',[InterestController::class,'store']);
     Route::post('deposite-money',[InterestController::class,'deposite']);
