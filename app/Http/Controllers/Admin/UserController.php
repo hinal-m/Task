@@ -33,7 +33,7 @@ class UserController extends Controller
         $request->validate(
             [
                 'name' => 'required',
-                'email' => 'required|email|unique:admins,email',
+                'email' => 'required|email|unique:users,email',
                 'mobile_no' => 'required|digits:10',
                 'password' => 'required|min:3|max:30',
                 'cpassword' => 'required|min:3|max:30|same:password',
@@ -42,6 +42,7 @@ class UserController extends Controller
             [
                 'name.required' => 'Please Enter Name',
                 'email.required' => 'Please Enter Email',
+                'email.unique' => 'email already exists',
                 'mobile_no.required' => 'Please Enter Mobile No',
                 'password.required' => 'Please Enter Password',
                 'cpassword.required' => 'Please Enter Confirm Password',
