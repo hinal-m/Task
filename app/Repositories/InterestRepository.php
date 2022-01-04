@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Interfaces\InterestInterface;
 use App\Models\Manyatinterest;
+use Illuminate\Database\Eloquent\Builder;
 
 ;
 
@@ -49,8 +50,17 @@ class InterestRepository implements InterestInterface
 
     public function getUnpaid()
     {
-        $interest = Manyatinterest::where('status','0')->get();
-        return $interest;
+        // $interest = Manyatinterest::whereIn('status', ['0','1'])->get();
+
+        // $interest = Manyatinterest::where(function (Builder $query) {
+        //     $query->where('status', '1')
+        //     ->orwhere('status','0');
+        // })->get();
+
+        // $interest = Manyatinterest::where('status','0')->orwhere('status', '1')->get();
+
+        // return $interest; 
+
     }
 
     public function getPaid()
