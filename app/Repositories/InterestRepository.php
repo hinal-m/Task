@@ -59,7 +59,7 @@ class InterestRepository implements InterestInterface
 
         // $interest = Manyatinterest::where('status','0')->orwhere('status', '1')->get();
 
-        // return $interest; 
+        //  return $interest;
 
     }
 

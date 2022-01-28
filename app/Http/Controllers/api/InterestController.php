@@ -17,9 +17,7 @@ class InterestController extends Controller
     public function list(Request $request)
     {
         $interest = $this->interest->list($request->all());
-        return response()->json([
-            'message' =>'Interest listed',
-            'data' => $interest]);
+        return $this->response($interest);
     }
 
     public function store(Request $request)
@@ -34,30 +32,25 @@ class InterestController extends Controller
             ]
         );
         $interest = $this->interest->store($request->all());
-        return response()->json(['data' => $interest]);
+        return $this->response($interest);
     }
 
     public function deposite(Request $request)
     {
         $money = $this->interest->deposite($request->all());
-        return response()->json([
-            'message' =>'Amount deposite succesfully',
-            'data' => $money]);
+        return $this->response($money);
     }
 
     public function getUnpaid(Request $request)
     {
         $status = $this->interest->getUnpaid($request->all());
-        return response()->json([
-            'message' =>'Unpaid status list',
-            'data' => $status]);
+        return $this->response($status);
     }
 
     public function getPaid(Request $request)
     {
         $status = $this->interest->getPaid($request->all());
-        return response()->json([
-            'message' =>'Paid status list',
-            'data' => $status]);
+        return $this->response($status);
+
     }
 }
