@@ -17,9 +17,7 @@ class UserController extends Controller
     public function list()
     {
         $user = $this->user->all();
-        return response()->json([
-            'message' =>'User listed',
-            'data' => $user]);
+        return $this->response($user);
     }
     public function store(Request $request)
     {
@@ -43,7 +41,7 @@ class UserController extends Controller
             ]
         );
         $user = $this->user->store($request->all());
-        return response()->json(['data' => $user]);
+        return $this->response($user);
     }
 
     public function update(Request $request)
@@ -62,17 +60,11 @@ class UserController extends Controller
             ]
         );
         $user = $this->user->update($request->all());
-        return response()->json([
-            'message' => 'User updated succesfully',
-            'data' => $user,
-        ]);
+        return $this->response($user);
     }
     public function delete(Request $request)
     {
         $user = $this->user->delete($request->all());
-        return response()->json([
-            'message' => 'User deleted succesfully',
-            'data' => $user,
-        ]);
+        return $this->response($user);
     }
 }
